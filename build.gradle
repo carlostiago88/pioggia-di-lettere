@@ -1,0 +1,10 @@
+/*task muleapp(type: Copy) {
+    def jars=[]
+    //project.libsDir
+    subprojects.each {
+        jars+=it.libsDir
+    }
+    from jars
+    into 'bin'
+}
+*/
