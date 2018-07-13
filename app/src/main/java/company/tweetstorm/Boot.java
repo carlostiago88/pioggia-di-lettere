@@ -3,24 +3,45 @@ package company.tweetstorm.configuration;
 
 import org.apache.commons.cli.*;
 
+import java.util.Arrays;
+
 public class Boot {
+
+    private static final TweetStormOptions tweetStormOptions = new TweetStormOptions();
+    private static final TweetStormService tweetStormService = new TweetStormService();
+
     public static void main(String[] args) {
+
+        Options options = tweetStormOptions.tweetStormOptionsRegister();
+
+        //args = new String[] {"--text=aaaaaaaaaaaaaaaaaaaaaaaaaaaaab" };
+        args = new String[] {"-d" };
+        /*+
+                "aaaaaaaaaa aaaaaaaaaaaaaaaaaab" +
+                "aaaaaaaaaa aaaaaaaaaaaaaaaaaab" +
+                "aaaaaaaaaa aaaaaaaaaaaaaaaaaab" +
+               "aaaaaaaaaa aaaaaaaaaaaaaaaaaab"};
+        */
         try{
-            Options options = new Options();
-
-            options.addOption("text", false, "full text");
-
-
             CommandLineParser parser = new DefaultParser();
             CommandLine cmd = parser.parse(options, args);
-            System.out.println("TRY");
             if(cmd.hasOption("text")) {
-                String fullText = cmd.getOptionValue("text");
-                System.out.println(fullText);
+                String text = cmd.getOptionValue("text");
+                if(!text.equals("")){
+                    String [] textSplited = tweetStormService.splitTextFor(text);
+
+                    System.out.println("###### BEGIN TWEET STORM #########\n");
+                    Arrays.stream(textSplited).forEach(s ->System.out.println(" | "+s+"\n"));
+                    System.out.println("###### END TWEET STORM #########");
+                }
             }
-            else {
-                // print the date
+            if(cmd.hasOption("help")){
+
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp( "tweetStorm", options);
             }
+
+
         }catch (ParseException exception)
         {
             System.out.print("Parse error: ");
@@ -31,10 +52,10 @@ public class Boot {
 
         /*
         CommandLine commandLine;
-        Option option_A = Option.builder("A").argName("opt3").hasArg().desc("The A option").build();
-        Option option_r = Option.builder("r").argName("opt1").hasArg().desc("The r option").build();
-        Option option_S = Option.builder("S").argName("opt2").hasArg().desc("The S option").build();
-        Option option_test = Option.builder().longOpt("test").desc("The test option").build();
+        TweetStormOptions option_A = TweetStormOptions.builder("A").argName("opt3").hasArg().desc("The A option").build();
+        TweetStormOptions option_r = TweetStormOptions.builder("r").argName("opt1").hasArg().desc("The r option").build();
+        TweetStormOptions option_S = TweetStormOptions.builder("S").argName("opt2").hasArg().desc("The S option").build();
+        TweetStormOptions option_test = TweetStormOptions.builder().longOpt("test").desc("The test option").build();
         Options options = new Options();
         CommandLineParser parser = new DefaultParser();
 
@@ -58,25 +79,25 @@ public class Boot {
 
             if (commandLine.hasOption("A"))
             {
-                System.out.print("Option A is present.  The value is: ");
+                System.out.print("TweetStormOptions A is present.  The value is: ");
                 System.out.println(commandLine.getOptionValue("A"));
             }
 
             if (commandLine.hasOption("r"))
             {
-                System.out.print("Option r is present.  The value is: ");
+                System.out.print("TweetStormOptions r is present.  The value is: ");
                 System.out.println(commandLine.getOptionValue("r"));
             }
 
             if (commandLine.hasOption("S"))
             {
-                System.out.print("Option S is present.  The value is: ");
+                System.out.print("TweetStormOptions S is present.  The value is: ");
                 System.out.println(commandLine.getOptionValue("S"));
             }
 
             if (commandLine.hasOption("test"))
             {
-                System.out.println("Option test is present.  This is a flag option.");
+                System.out.println("TweetStormOptions test is present.  This is a flag option.");
             }
 
             {
