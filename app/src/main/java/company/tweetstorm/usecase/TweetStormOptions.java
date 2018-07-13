@@ -1,4 +1,4 @@
-package company.tweetstorm.configuration;
+package company.tweetstorm.usecase;
 
 import org.apache.commons.cli.Options;
 

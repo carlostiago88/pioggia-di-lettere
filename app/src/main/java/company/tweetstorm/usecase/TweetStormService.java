@@ -1,4 +1,4 @@
-package company.tweetstorm.configuration;
+package company.tweetstorm.usecase;
 
 public class TweetStormService {
 
