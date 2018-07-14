@@ -7,7 +7,7 @@ version '1.0'
 
 mainClassName = "app.company.tweetstorm.Boot"
 
-task tweetStormJar(dependsOn: 'stepTwo'){
+task tweetStormInstall(dependsOn: 'stepTwo'){
     print 'tasks executed with success'
 }
 
