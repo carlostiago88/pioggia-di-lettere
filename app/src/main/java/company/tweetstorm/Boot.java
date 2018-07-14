@@ -1,26 +1,17 @@
 package company.tweetstorm;
 
 
-import company.tweetstorm.usecase.TweetStormOptions;
-import company.tweetstorm.usecase.TweetStormService;
-import org.apache.commons.cli.*;
-
-import java.util.Arrays;
+import company.tweetstorm.usecase.TweetStormGateway;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Boot {
 
-    private static final TweetStormOptions tweetStormOptions = new TweetStormOptions();
-    private static final TweetStormService tweetStormService = new TweetStormService();
+    private static final TweetStormGateway tweetStormGateway = new TweetStormGateway();
+    private static final Logger LOGGER = LoggerFactory.getLogger(Boot.class);
 
     public static void main(String[] args) {
-
-        //args = new String[] {"--text=aaaaaaaaaaaaaaaaaaaaaaaaaaaaab" };
-        args = new String[] {"-d" };
-        /*+
-                "aaaaaaaaaa aaaaaaaaaaaaaaaaaab" +
-                "aaaaaaaaaa aaaaaaaaaaaaaaaaaab" +
-                "aaaaaaaaaa aaaaaaaaaaaaaaaaaab" +
-               "aaaaaaaaaa aaaaaaaaaaaaaaaaaab"};
-        */
+        LOGGER.info("TweetStorm is running...");
+        tweetStormGateway.receiveArgs(args);
     }
 }

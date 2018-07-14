@@ -1,15 +1,20 @@
 package company.tweetstorm.usecase;
 
 import org.apache.commons.cli.Options;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class TweetStormOptions {
+class TweetStormOptions {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TweetStormGateway.class);
     private static final Options options = new Options();
 
-    public Options tweetStormOptionsRegister() {
+    TweetStormOptions(){
+        LOGGER.info("TweetStormOptions loaded with success");
+    }
+
+    Options tweetStormOptionsRegister() {
         options.addOption( "h","help",false, "print this message" );
-        options.addOption( "v","version", false,"print the version information and exit" );
-        options.addOption( "d", "debug",false,"print debugging information" );
         options.addOption("t", "text", true, "full text to Twitter");
         return options;
     }

@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+version '1.0'
+
+mainClassName = "app.company.tweetstorm.Boot"
+
+task tweetStormJar(dependsOn: 'stepTwo'){
+    print 'tasks executed with success'
+}
+
+task stepTwo(dependsOn: ':app:stepOne',type: Copy){
+    from 'app/build/libs'
+    into '.'
+    include 'tweetstorm-generator*.jar'
+}
+
